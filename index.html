@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CenTrak Supply Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #003057;
+  --navy-dark:  #001f3d;
+  --navy-mid:   #004070;
+  --cyan:       #00B0CA;
+  --cyan-light: #33C4D8;
+  --cyan-pale:  #E0F6FA;
+  --cyan-bg:    #F0FBFD;
+  --white:      #FFFFFF;
+  --off-white:  #F8F9FA;
+  --grey-50:    #F4F5F6;
+  --grey-100:   #E8EAED;
+  --grey-200:   #D1D5DB;
+  --grey-400:   #9CA3AF;
+  --grey-600:   #4B5563;
+  --grey-800:   #1F2937;
+  --success:    #166534;
+  --success-bg: #DCFCE7;
+  --warning:    #92400E;
+  --warning-bg: #FEF3C7;
+  --red:        #991B1B;
+  --font:       'Source Sans 3', sans-serif;
+  --font-serif: 'Source Serif 4', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--off-white); color: var(--grey-800); min-height: 100vh; }
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--navy-dark);
+  padding: 7px 0;
+  font-size: .75rem;
+  color: rgba(255,255,255,.6);
+}
+.topbar-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.topbar a { color: rgba(255,255,255,.6); text-decoration: none; }
+.topbar a:hover { color: var(--cyan); }
+.topbar-links { display: flex; gap: 20px; }
+
+/* ── HEADER ── */
+header {
+  background: var(--navy);
+  position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 2px 16px rgba(0,0,0,.3);
+}
+.header-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  height: 70px;
+  display: flex; align-items: center; gap: 32px;
+}
+.logo-wrap { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+.logo-icon {
+  width: 40px; height: 40px;
+  background: var(--cyan);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-icon svg { width: 22px; height: 22px; fill: var(--navy); }
+.logo-text-wrap { display: flex; flex-direction: column; gap: 1px; }
+.logo-brand { font-size: 1.2rem; font-weight: 700; color: #fff; letter-spacing: .02em; line-height: 1; }
+.logo-store { font-size: .68rem; color: var(--cyan); letter-spacing: .14em; text-transform: uppercase; font-weight: 500; }
+
+/* Search */
+.header-search {
+  flex: 1; max-width: 440px;
+  display: flex; align-items: center;
+  background: rgba(255,255,255,.1);
+  border: 1.5px solid rgba(255,255,255,.15);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all .2s;
+}
+.header-search:focus-within {
+  background: rgba(255,255,255,.15);
+  border-color: var(--cyan);
+}
+.header-search input {
+  flex: 1; border: none; outline: none;
+  background: transparent;
+  padding: 9px 16px;
+  font-family: var(--font); font-size: .88rem;
+  color: #fff;
+}
+.header-search input::placeholder { color: rgba(255,255,255,.4); }
+.search-btn {
+  padding: 0 16px; height: 40px;
+  background: var(--cyan);
+  border: none; cursor: pointer;
+  color: var(--navy);
+  display: flex; align-items: center;
+  transition: background .2s;
+}
+.search-btn:hover { background: var(--cyan-light); }
+.search-btn svg { width: 16px; height: 16px; fill: none; stroke: var(--navy); stroke-width: 2; }
+
+/* Header actions */
+.header-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.acct-badge {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: .82rem; color: rgba(255,255,255,.8);
+}
+.acct-badge svg { width: 14px; height: 14px; fill: none; stroke: var(--cyan); stroke-width: 2; }
+.acct-input {
+  background: transparent; border: none; outline: none;
+  font-family: var(--font); font-size: .82rem; color: #fff;
+  width: 120px;
+}
+.acct-input::placeholder { color: rgba(255,255,255,.4); }
+.cart-btn {
+  display: flex; align-items: center; gap: 9px;
+  background: var(--cyan);
+  border: none; border-radius: 6px;
+  padding: 9px 18px;
+  font-family: var(--font); font-size: .88rem; font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  transition: background .2s;
+  white-space: nowrap;
+}
+.cart-btn:hover { background: var(--cyan-light); }
+.cart-btn svg { width: 16px; height: 16px; fill: none; stroke: var(--navy); stroke-width: 2; }
+.cart-pill {
+  background: var(--navy);
+  color: var(--cyan);
+  font-size: .7rem; font-weight: 700;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── NAV BAR ── */
+.category-nav {
+  background: var(--white);
+  border-bottom: 2px solid var(--grey-100);
+  position: sticky; top: 70px; z-index: 100;
+}
+.category-nav-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center; gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.category-nav-inner::-webkit-scrollbar { display: none; }
+.cat-tab {
+  display: flex; align-items: center; gap: 7px;
+  padding: 14px 18px;
+  font-size: .85rem; font-weight: 500;
+  color: var(--grey-600);
+  border: none; background: none;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: all .2s;
+  margin-bottom: -2px;
+}
+.cat-tab svg { width: 15px; height: 15px; }
+.cat-tab:hover { color: var(--navy); }
+.cat-tab.active {
+  color: var(--navy);
+  border-bottom-color: var(--cyan);
+  font-weight: 600;
+}
+.cat-count {
+  background: var(--grey-100);
+  color: var(--grey-600);
+  font-size: .68rem; font-weight: 700;
+  padding: 2px 7px; border-radius: 100px;
+}
+.cat-tab.active .cat-count { background: var(--cyan-pale); color: var(--navy); }
+
+/* ── HERO BANNER ── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #005a80 100%);
+  padding: 36px 32px;
+  position: relative; overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute; right: -60px; top: -60px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(0,176,202,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1320px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+}
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: #fff; font-weight: 600; line-height: 1.25;
+  margin-bottom: 8px;
+}
+.hero p { font-size: .9rem; color: rgba(255,255,255,.65); font-weight: 300; max-width: 480px; }
+.hero-pills { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+.hero-pill {
+  background: rgba(0,176,202,.15);
+  border: 1px solid rgba(0,176,202,.3);
+  color: var(--cyan-light);
+  font-size: .75rem; font-weight: 500;
+  padding: 4px 12px; border-radius: 100px;
+}
+.hero-stats { display: flex; gap: 32px; flex-shrink: 0; }
+.hero-stat { text-align: center; }
+.hero-stat .n { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 600; color: var(--cyan); display: block; }
+.hero-stat .l { font-size: .72rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .08em; }
+
+/* ── MAIN LAYOUT ── */
+.main { max-width: 1320px; margin: 0 auto; padding: 32px 32px; display: grid; grid-template-columns: 1fr 360px; gap: 32px; align-items: start; }
+
+/* ── PRODUCT PANEL ── */
+.panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.panel-title { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+.panel-meta { font-size: .8rem; color: var(--grey-400); }
+.sort-select {
+  border: 1.5px solid var(--grey-200); border-radius: 6px;
+  padding: 6px 12px; font-family: var(--font); font-size: .82rem; color: var(--grey-800);
+  background: #fff; cursor: pointer; outline: none;
+}
+
+/* ── PRODUCT TABLE ── */
+.product-table {
+  background: #fff;
+  border-radius: 10px;
+  border: 1.5px solid var(--grey-100);
+  overflow: hidden;
+}
+.table-header {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px 100px 130px;
+  background: var(--navy);
+  padding: 12px 20px;
+  gap: 12px;
+}
+.th {
+  font-size: .72rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: rgba(255,255,255,.6);
+}
+.th.center { text-align: center; }
+
+.product-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px 100px 130px;
+  padding: 14px 20px;
+  gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--grey-100);
+  transition: background .15s;
+  animation: fadeRow .2s ease;
+}
+@keyframes fadeRow { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+.product-row:last-child { border-bottom: none; }
+.product-row:hover { background: var(--cyan-bg); }
+
+.part-num {
+  font-size: .75rem; font-family: 'Courier New', monospace;
+  color: var(--grey-400); font-weight: 500;
+  word-break: break-all; line-height: 1.3;
+}
+.prod-name { font-size: .88rem; font-weight: 500; color: var(--grey-800); line-height: 1.35; }
+.prod-name small { display: block; font-size: .73rem; color: var(--grey-400); font-weight: 400; margin-top: 2px; }
+.stock-badge {
+  font-size: .7rem; font-weight: 600; padding: 3px 10px; border-radius: 100px;
+  white-space: nowrap; text-align: center; display: inline-block;
+}
+.in-stock { background: var(--success-bg); color: var(--success); }
+.low-stock { background: var(--warning-bg); color: var(--warning); }
+.price-cell { font-size: .9rem; font-weight: 700; color: var(--navy); text-align: center; }
+.price-cell span { display: block; font-size: .7rem; font-weight: 400; color: var(--grey-400); }
+.add-cell { display: flex; align-items: center; gap: 6px; justify-content: flex-end; }
+.qty-wrap {
+  display: flex; align-items: center;
+  border: 1.5px solid var(--grey-200); border-radius: 6px; overflow: hidden;
+}
+.qb { width: 26px; height: 30px; border: none; background: var(--grey-50); color: var(--grey-600); cursor: pointer; font-size: 1rem; transition: background .15s; display: flex; align-items: center; justify-content: center; }
+.qb:hover { background: var(--cyan-pale); color: var(--navy); }
+.qi { width: 36px; height: 30px; border: none; outline: none; text-align: center; font-family: var(--font); font-size: .85rem; font-weight: 600; color: var(--navy); background: #fff; }
+.add-btn {
+  height: 30px; padding: 0 12px;
+  background: var(--navy);
+  color: #fff; border: none; border-radius: 6px;
+  font-family: var(--font); font-size: .78rem; font-weight: 600;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.add-btn:hover { background: var(--cyan); color: var(--navy); }
+.add-btn.added { background: var(--success); color: #fff; }
+
+/* Category section dividers */
+.cat-section-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 20px 10px;
+  background: var(--grey-50);
+  border-bottom: 1px solid var(--grey-100);
+}
+.cat-section-icon {
+  width: 30px; height: 30px;
+  background: var(--navy);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.cat-section-icon svg { width: 15px; height: 15px; fill: none; stroke: var(--cyan); stroke-width: 2; }
+.cat-section-title { font-size: .88rem; font-weight: 700; color: var(--navy); }
+.cat-section-sub { font-size: .75rem; color: var(--grey-400); margin-left: auto; }
+
+/* ── CART SIDEBAR ── */
+.cart-sidebar {
+  background: #fff;
+  border-radius: 10px;
+  border: 1.5px solid var(--grey-100);
+  overflow: hidden;
+  position: sticky; top: 130px;
+}
+.cart-head {
+  background: var(--navy);
+  padding: 18px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cart-head h3 { font-size: 1rem; font-weight: 700; color: #fff; font-family: var(--font-serif); }
+.cart-head-badge {
+  background: var(--cyan);
+  color: var(--navy);
+  font-size: .7rem; font-weight: 700;
+  padding: 2px 10px; border-radius: 100px;
+}
+.cart-body { max-height: 340px; overflow-y: auto; }
+.cart-empty-state {
+  padding: 36px 20px; text-align: center;
+}
+.cart-empty-state svg { width: 40px; height: 40px; stroke: var(--grey-200); stroke-width: 1.5; fill: none; margin-bottom: 10px; }
+.cart-empty-state p { font-size: .82rem; color: var(--grey-400); line-height: 1.5; }
+
+.cart-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--grey-100);
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 8px; align-items: start;
+  animation: slideIn .2s ease;
+}
+@keyframes slideIn { from { opacity:0; transform:translateX(8px); } to { opacity:1; transform:translateX(0); } }
+.ci-name { font-size: .8rem; font-weight: 600; color: var(--grey-800); line-height: 1.3; }
+.ci-part { font-size: .7rem; color: var(--grey-400); font-family: monospace; margin-top: 2px; }
+.ci-qty { font-size: .75rem; color: var(--grey-500); margin-top: 3px; }
+.ci-price { font-size: .85rem; font-weight: 700; color: var(--navy); text-align: right; white-space: nowrap; }
+.ci-remove { display: block; font-size: .7rem; color: var(--grey-400); background: none; border: none; cursor: pointer; text-align: right; margin-top: 2px; transition: color .15s; padding: 0; }
+.ci-remove:hover { color: var(--red); }
+
+/* Saved section */
+.cart-saved { padding: 10px 16px; background: var(--grey-50); border-bottom: 1px solid var(--grey-100); }
+.saved-label { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--grey-400); margin-bottom: 6px; }
+.saved-item { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px solid var(--grey-100); }
+.saved-item:last-child { border-bottom: none; }
+.saved-name { font-size: .78rem; color: var(--grey-600); flex: 1; }
+.saved-reorder { background: none; border: none; color: var(--cyan); font-size: .75rem; font-weight: 600; cursor: pointer; font-family: var(--font); transition: color .15s; padding: 0; white-space: nowrap; margin-left: 8px; }
+.saved-reorder:hover { color: var(--navy); }
+
+/* Totals */
+.cart-totals { padding: 14px 16px; border-top: 1px solid var(--grey-100); }
+.tot-row { display: flex; justify-content: space-between; font-size: .82rem; color: var(--grey-600); padding: 3px 0; }
+.tot-row.grand { font-weight: 700; color: var(--navy); font-size: .95rem; padding-top: 10px; margin-top: 6px; border-top: 1.5px solid var(--grey-200); }
+.cart-actions { padding: 14px 16px; }
+.checkout-btn {
+  width: 100%;
+  background: var(--cyan);
+  color: var(--navy);
+  border: none; border-radius: 6px;
+  padding: 13px;
+  font-family: var(--font); font-size: .92rem; font-weight: 700;
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.checkout-btn:hover:not(:disabled) { background: var(--cyan-light); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,176,202,.35); }
+.checkout-btn:disabled { opacity: .4; cursor: not-allowed; }
+.checkout-note { text-align: center; font-size: .7rem; color: var(--grey-400); margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+.quick-reorder-btn {
+  width: 100%; margin-top: 8px;
+  background: transparent; border: 1.5px solid var(--grey-200);
+  color: var(--grey-600); border-radius: 6px;
+  padding: 9px; font-family: var(--font); font-size: .82rem; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+}
+.quick-reorder-btn:hover { border-color: var(--navy); color: var(--navy); }
+
+/* ── MODAL ── */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,30,57,.65); backdrop-filter: blur(4px);
+  z-index: 500; align-items: center; justify-content: center; padding: 20px;
+}
+.overlay.open { display: flex; }
+.modal {
+  background: #fff; border-radius: 12px;
+  width: 100%; max-width: 560px;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(0,0,0,.3);
+  animation: modalPop .25s ease;
+}
+@keyframes modalPop { from { opacity:0; transform:scale(.96) translateY(12px); } to { opacity:1; transform:scale(1) translateY(0); } }
+.modal-head {
+  background: var(--navy); padding: 22px 28px;
+  border-radius: 12px 12px 0 0;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-head h3 { font-family: var(--font-serif); font-size: 1.15rem; color: #fff; }
+.modal-close { background: rgba(255,255,255,.1); border: none; color: #fff; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 1rem; transition: background .2s; display: flex; align-items: center; justify-content: center; }
+.modal-close:hover { background: rgba(255,255,255,.25); }
+.modal-body { padding: 28px; }
+
+.form-section { margin-bottom: 24px; }
+.fs-title { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); border-bottom: 2px solid var(--cyan-pale); padding-bottom: 8px; margin-bottom: 14px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fg { display: flex; flex-direction: column; gap: 5px; }
+.fg.full { grid-column: 1 / -1; }
+.fl { font-size: .78rem; font-weight: 600; color: var(--grey-600); }
+.fi, .fsel {
+  border: 1.5px solid var(--grey-200); border-radius: 6px;
+  padding: 9px 12px; font-family: var(--font); font-size: .88rem;
+  color: var(--grey-800); outline: none; transition: border-color .2s;
+  background: #fff; appearance: none;
+}
+.fi:focus, .fsel:focus { border-color: var(--cyan); }
+.fi::placeholder { color: var(--grey-400); }
+
+.pay-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+.pay-tab { flex: 1; padding: 9px; border: 1.5px solid var(--grey-200); border-radius: 6px; font-family: var(--font); font-size: .82rem; font-weight: 600; cursor: pointer; background: #fff; color: var(--grey-600); transition: all .2s; text-align: center; }
+.pay-tab.active { border-color: var(--navy); background: var(--navy); color: #fff; }
+
+.order-mini { background: var(--grey-50); border-radius: 8px; padding: 14px; }
+.om-row { display: flex; justify-content: space-between; font-size: .82rem; color: var(--grey-600); padding: 3px 0; }
+.om-row.total { font-weight: 700; color: var(--navy); font-size: .9rem; padding-top: 8px; margin-top: 6px; border-top: 1px solid var(--grey-200); }
+
+.submit-btn {
+  width: 100%; background: var(--cyan); color: var(--navy);
+  border: none; border-radius: 8px; padding: 14px;
+  font-family: var(--font); font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: all .2s; margin-top: 20px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.submit-btn:hover { background: var(--cyan-light); transform: translateY(-1px); }
+.secure-note { display: flex; align-items: center; justify-content: center; gap: 5px; margin-top: 10px; font-size: .72rem; color: var(--grey-400); }
+
+/* Success */
+.success-view { display: none; padding: 40px 28px; text-align: center; }
+.success-view.show { display: block; }
+.success-check { width: 64px; height: 64px; background: var(--cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.success-check svg { width: 32px; height: 32px; fill: none; stroke: var(--navy); stroke-width: 3; }
+.success-view h3 { font-family: var(--font-serif); font-size: 1.4rem; color: var(--navy); margin-bottom: 10px; }
+.success-view p { font-size: .88rem; color: var(--grey-600); line-height: 1.6; margin-bottom: 16px; }
+.order-ref { background: var(--grey-50); border-radius: 6px; padding: 10px 20px; font-family: monospace; font-size: .9rem; color: var(--navy); font-weight: 700; display: inline-block; margin-bottom: 20px; border: 1px solid var(--grey-200); }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--navy); color: #fff;
+  padding: 12px 18px; border-radius: 8px;
+  font-size: .84rem; font-weight: 500;
+  box-shadow: 0 8px 28px rgba(0,0,0,.25);
+  display: flex; align-items: center; gap: 10px;
+  z-index: 600;
+  transform: translateY(70px); opacity: 0;
+  transition: all .3s; pointer-events: none;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-dot { width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; flex-shrink: 0; }
+
+/* ── FOOTER ── */
+.store-footer {
+  background: var(--navy-dark);
+  color: rgba(255,255,255,.5);
+  text-align: center; padding: 20px;
+  font-size: .78rem; margin-top: 40px;
+}
+.store-footer a { color: var(--cyan); text-decoration: none; }
+
+@media (max-width: 1024px) { .main { grid-template-columns: 1fr; } .cart-sidebar { position: static; } }
+@media (max-width: 768px) {
+  .header-inner { padding: 0 16px; gap: 12px; }
+  .hero { padding: 24px 16px; }
+  .hero-stats { display: none; }
+  .main { padding: 16px; }
+  .table-header, .product-row { grid-template-columns: 1fr 90px; gap: 8px; }
+  .table-header .th:not(:first-child):not(:last-child),
+  .product-row > *:not(.prod-name):not(.add-cell) { display: none; }
+  .topbar { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>CenTrak Supply Store — Authorized Replacement Parts & Accessories</span>
+    <div class="topbar-links">
+      <a href="#">Support</a>
+      <a href="#">Contact Us</a>
+      <a href="#">centrak.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo-wrap">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="logo-text-wrap">
+        <span class="logo-brand">CenTrak</span>
+        <span class="logo-store">Supply Store</span>
+      </div>
+    </a>
+
+    <div class="header-search">
+      <input type="text" placeholder="Search by part number or description..." id="searchInput" oninput="handleSearch()">
+      <button class="search-btn">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+
+    <div class="header-actions">
+      <div class="acct-badge">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <input class="acct-input" id="acctNum" type="text" placeholder="Account / PO #">
+      </div>
+      <button class="cart-btn" onclick="openCheckout()">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Cart
+        <span class="cart-pill" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- CATEGORY NAV -->
+<nav class="category-nav">
+  <div class="category-nav-inner" id="catNav"></div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>Genuine CenTrak Replacement<br>Parts & Accessories</h1>
+      <p>OEM-certified components for RTLS tags, badges, infrastructure, and mounting hardware. Same-day processing on orders placed before 2 PM EST.</p>
+      <div class="hero-pills">
+        <span class="hero-pill">✓ OEM Certified</span>
+        <span class="hero-pill">✓ 3–5 Day Delivery</span>
+        <span class="hero-pill">✓ Net-30 Available</span>
+        <span class="hero-pill">✓ 85+ SKUs In Stock</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="n">85+</span><span class="l">Products</span></div>
+      <div class="hero-stat"><span class="n">7</span><span class="l">Categories</span></div>
+      <div class="hero-stat"><span class="n">2PM</span><span class="l">Same-day cutoff</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <!-- LEFT: PRODUCTS -->
+  <div>
+    <div class="panel-header">
+      <span class="panel-title" id="panelTitle">All Products</span>
+      <span class="panel-meta" id="panelMeta"></span>
+    </div>
+    <div class="product-table" id="productTable">
+      <div class="table-header">
+        <div class="th">Part #</div>
+        <div class="th">Description</div>
+        <div class="th center">Availability</div>
+        <div class="th center">Unit Price</div>
+        <div class="th"></div>
+      </div>
+      <div id="productRows"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: CART -->
+  <aside>
+    <div class="cart-sidebar">
+      <div class="cart-head">
+        <h3>Your Order</h3>
+        <span class="cart-head-badge" id="cartBadge">0 items</span>
+      </div>
+      <div id="savedSection" style="display:none" class="cart-saved">
+        <div class="saved-label">⚡ Quick Reorder — Last Order</div>
+        <div id="savedItems"></div>
+      </div>
+      <div class="cart-body">
+        <div class="cart-empty-state" id="cartEmpty">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <p>Your cart is empty.<br>Browse the catalog and add items.</p>
+        </div>
+        <div id="cartItems"></div>
+      </div>
+      <div class="cart-totals" id="cartTotals" style="display:none">
+        <div class="tot-row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+        <div class="tot-row"><span>Shipping</span><span>Calculated at checkout</span></div>
+        <div class="tot-row grand"><span>Est. Total</span><span id="grandTotal">$0.00</span></div>
+      </div>
+      <div class="cart-actions">
+        <button class="checkout-btn" id="checkoutBtn" onclick="openCheckout()" disabled>
+          Proceed to Checkout →
+        </button>
+        <button class="quick-reorder-btn" onclick="loadSaved()">↩ Load Last Order</button>
+        <div class="checkout-note">🔒 Secure checkout &nbsp;·&nbsp; Net-30 available</div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="overlay" id="checkoutOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Complete Your Order</h3>
+      <button class="modal-close" onclick="closeCheckout()">×</button>
+    </div>
+    <div class="modal-body" id="checkoutForm">
+      <!-- Shipping -->
+      <div class="form-section">
+        <div class="fs-title">Shipping Information</div>
+        <div class="form-grid">
+          <div class="fg"><label class="fl">First Name</label><input class="fi" placeholder="Jane"></div>
+          <div class="fg"><label class="fl">Last Name</label><input class="fi" placeholder="Smith"></div>
+          <div class="fg full"><label class="fl">Facility / Organization</label><input class="fi" placeholder="Ascension Health System"></div>
+          <div class="fg full"><label class="fl">Shipping Address</label><input class="fi" placeholder="123 Medical Center Drive"></div>
+          <div class="fg"><label class="fl">City</label><input class="fi" placeholder="Chicago"></div>
+          <div class="fg"><label class="fl">State / ZIP</label><input class="fi" placeholder="IL 60601"></div>
+        </div>
+      </div>
+      <!-- Billing -->
+      <div class="form-section">
+        <div class="fs-title">Billing & PO</div>
+        <div class="form-grid">
+          <div class="fg full"><label class="fl">CenTrak Account Number</label><input class="fi" id="modalAcct" placeholder="CTRAK-XXXXX"></div>
+          <div class="fg full"><label class="fl">Purchase Order Number (optional)</label><input class="fi" placeholder="PO-2026-00123"></div>
+          <div class="fg full"><label class="fl">Billing Contact Email</label><input class="fi" type="email" placeholder="ap@yourhospital.org"></div>
+        </div>
+      </div>
+      <!-- Payment -->
+      <div class="form-section">
+        <div class="fs-title">Payment Method</div>
+        <div class="pay-tabs">
+          <button class="pay-tab active" onclick="setPayTab(this,'card')">Credit / Debit Card</button>
+          <button class="pay-tab" onclick="setPayTab(this,'net30')">Net-30 Invoice</button>
+          <button class="pay-tab" onclick="setPayTab(this,'po')">Purchase Order</button>
+        </div>
+        <div id="cardFields" class="form-grid">
+          <div class="fg full"><label class="fl">Card Number</label><input class="fi" placeholder="•••• •••• •••• ••••" maxlength="19" oninput="fmtCard(this)"></div>
+          <div class="fg"><label class="fl">Expiry</label><input class="fi" placeholder="MM / YY" maxlength="7"></div>
+          <div class="fg"><label class="fl">CVV</label><input class="fi" placeholder="•••" maxlength="4" type="password"></div>
+        </div>
+        <div id="net30Fields" style="display:none">
+          <p style="font-size:.82rem;color:var(--grey-600);padding:12px;background:var(--cyan-pale);border-radius:6px;">Net-30 invoicing is available for approved CenTrak accounts. Your account manager will confirm eligibility before shipment.</p>
+        </div>
+        <div id="poFields" style="display:none" class="form-grid">
+          <div class="fg full"><label class="fl">PO Number</label><input class="fi" placeholder="PO-2026-00123"></div>
+          <div class="fg full"><label class="fl">Authorized Approver Email</label><input class="fi" type="email" placeholder="approver@hospital.org"></div>
+        </div>
+      </div>
+      <!-- Summary -->
+      <div class="form-section">
+        <div class="fs-title">Order Summary</div>
+        <div class="order-mini" id="orderMini"></div>
+      </div>
+      <button class="submit-btn" onclick="submitOrder()">
+        Place Order — <span id="submitTotal"></span>
+      </button>
+      <div class="secure-note">🔒 256-bit SSL &nbsp;·&nbsp; PCI-DSS Compliant &nbsp;·&nbsp; HIPAA Secure</div>
+    </div>
+    <!-- Success -->
+    <div class="success-view" id="successView">
+      <div class="success-check">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Order Confirmed!</h3>
+      <p>Your order has been received and is being processed. A confirmation will be sent to your billing contact email.</p>
+      <div class="order-ref" id="orderRef"></div>
+      <p style="font-size:.78rem;color:var(--grey-400)">Estimated delivery: 3–5 business days<br>Questions? Contact your CenTrak account manager.</p>
+      <button class="submit-btn" onclick="closeCheckout()" style="max-width:200px;margin:16px auto 0">Continue Shopping</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="toast-dot"></span><span id="toastMsg"></span></div>
+
+<!-- FOOTER -->
+<footer class="store-footer">
+  © 2026 CenTrak, a Halma company &nbsp;·&nbsp;
+  <a href="#">centrak.com</a> &nbsp;·&nbsp;
+  <a href="#">Support Portal</a> &nbsp;·&nbsp;
+  All products are OEM-certified CenTrak replacement parts.
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════
+// PRODUCT CATALOG — all 85 SKUs, categorized
+// ══════════════════════════════════════════════════
+const CATEGORIES = [
+  { id:'all',        label:'All Products',         icon:'grid' },
+  { id:'batteries',  label:'Batteries',            icon:'zap' },
+  { id:'tags',       label:'Tags & Badges',        icon:'tag' },
+  { id:'mounting',   label:'Mounting & Brackets',  icon:'anchor' },
+  { id:'cables',     label:'Cables & Power',       icon:'link' },
+  { id:'scanners',   label:'Scanners & Devices',   icon:'monitor' },
+  { id:'tools',      label:'Tools & Consumables',  icon:'tool' },
+  { id:'kits',       label:'Kits & Bundles',       icon:'package' },
+];
+
+const PRODUCTS = [
+  // ── BATTERIES ────────────────────────────────────
+  { id:'CTA-BTEX760', sku:'CTA-BTEX760', name:'Extended Life Battery Pack for BLE MM Badge', desc:'Single pack', cat:'batteries', price:18.50, stock:'in' },
+  { id:'CTK-BTEX760', sku:'CTK-BTEX760', name:'Extended Life Battery Pack for BLE MM Badge', desc:'Kit of 10', cat:'batteries', price:165.00, stock:'in' },
+  { id:'ITA-764',     sku:'ITA-764',     name:'Tag Battery CR-2430', desc:'Single',             cat:'batteries', price:3.25,  stock:'in' },
+  { id:'ITAK-356',    sku:'ITAK-356',    name:'Lithium D-Cell Battery (TAD)', desc:'10-Pack',   cat:'batteries', price:42.00, stock:'in' },
+  { id:'ITAK-764',    sku:'ITAK-764',    name:'Tag Battery CR-2430', desc:'50-Pack',            cat:'batteries', price:88.00, stock:'in' },
+  { id:'ITAK-765',    sku:'ITAK-765',    name:'Wi-Fi MM Staff Badge Batteries with Contacts 1/10 D-Cell', desc:'10-Pack', cat:'batteries', price:55.00, stock:'in' },
+  { id:'ITAK-767',    sku:'ITAK-767',    name:'Wi-Fi MM Asset Tag / Extended Life / Temp Tag Battery ER14250E (1/2 AA)', desc:'10-Pack', cat:'batteries', price:48.00, stock:'in' },
+  { id:'ITAK-768',    sku:'ITAK-768',    name:'Micro Tag Battery CR-2032', desc:'25-Pack',      cat:'batteries', price:22.00, stock:'in' },
+  { id:'ITAK-769',    sku:'ITAK-769',    name:'Tag Battery CR-2450', desc:'25-Pack',            cat:'batteries', price:26.00, stock:'in' },
+  { id:'ITAK-797',    sku:'ITAK-797',    name:'Staff Badge Battery Cover Replacement', desc:'Qty 25', cat:'batteries', price:38.00, stock:'in' },
+  { id:'ITAK-798',    sku:'ITAK-798',    name:'Staff Badge Battery Cover Screws', desc:'Qty 50', cat:'batteries', price:12.00, stock:'in' },
+
+  // ── TAGS & BADGES ─────────────────────────────────
+  { id:'ITA-8010',    sku:'ITA-8010',    name:'Patient Badge Covers — Custom', desc:'',          cat:'tags', price:null, stock:'in' },
+  { id:'ITA-8000',    sku:'ITA-8000',    name:'Badge Sleeve — Vertical 3.5 × 2.25"', desc:'',    cat:'tags', price:4.50, stock:'in' },
+  { id:'ITA-8001',    sku:'ITA-8001',    name:'Badge Clip — Metal', desc:'',                     cat:'tags', price:2.50, stock:'in' },
+  { id:'ITA-8006',    sku:'ITA-8006',    name:'Badge Sleeve 3×4 — Horizontal', desc:'',          cat:'tags', price:4.50, stock:'in' },
+  { id:'ITA-8008',    sku:'ITA-8008',    name:'Badge Tray — 7-Section Acrylic', desc:'',         cat:'tags', price:24.00, stock:'in' },
+  { id:'ITAK-356FMT', sku:'ITAK-356FMT', name:'Security Band', desc:'Pack of 5',                 cat:'tags', price:14.00, stock:'in' },
+  { id:'ITAK-712',    sku:'ITAK-712',    name:'Mini Asset Tag Adhesive (Pegasus & Orion)', desc:'10-Pack', cat:'tags', price:18.00, stock:'in' },
+  { id:'ITAK-712B',   sku:'ITAK-712 B',  name:'Mini Asset Tag Bottom Housing With Adhesive (Pegasus & Orion)', desc:'10-Pack', cat:'tags', price:22.00, stock:'in' },
+  { id:'ITAK-717',    sku:'ITAK-717',    name:'Micro Asset Tag Adhesive (Pegasus & Orion)', desc:'10-Pack', cat:'tags', price:18.00, stock:'in' },
+  { id:'ITAK-717B',   sku:'ITAK-717 B',  name:'Micro Asset Tag Bottom Housing (Pegasus & Orion)', desc:'10-Pack', cat:'tags', price:22.00, stock:'in' },
+  { id:'ITAK-722B',   sku:'ITAK-722 B',  name:'Mini Patient Tag Bottom Housing (Pegasus & Orion)', desc:'10-Pack', cat:'tags', price:22.00, stock:'in' },
+  { id:'ITAK-761B',   sku:'ITAK-761 B',  name:'Multi-Mode Asset Tag Bottom Housing (Pegasus & Orion)', desc:'10-Pack', cat:'tags', price:22.00, stock:'in' },
+  { id:'ITAK-754',    sku:'ITAK-754',    name:'Patient Wrist Strap', desc:'10-Pack',             cat:'tags', price:16.00, stock:'in' },
+  { id:'ITA-709',     sku:'ITA-709',     name:'DuraTag Rubber Cord', desc:'',                    cat:'tags', price:5.50, stock:'in' },
+
+  // ── MOUNTING & BRACKETS ───────────────────────────
+  { id:'ITA-152',     sku:'ITA-152',     name:'Star Ceiling Attachment', desc:'',               cat:'mounting', price:8.00, stock:'in' },
+  { id:'ITA-366',     sku:'ITA-366',     name:'HH Seismic Wire for VW/Monitor', desc:'',        cat:'mounting', price:6.50, stock:'in' },
+  { id:'ITA-367',     sku:'ITA-367',     name:'Ridge Beam Bracket — VW', desc:'',               cat:'mounting', price:12.00, stock:'in' },
+  { id:'ITA-374ES',   sku:'ITA-374ES',   name:'Star / Exciter Weather Proof Protective Dome', desc:'', cat:'mounting', price:28.00, stock:'in' },
+  { id:'ITA-374M',    sku:'ITA-374M',    name:'Monitor Weather Proof Protective Dome', desc:'', cat:'mounting', price:28.00, stock:'in' },
+  { id:'ITA-381',     sku:'ITA-381',     name:'VW Monitor IR Blocker — 2-Inch (standard)', desc:'', cat:'mounting', price:7.00, stock:'in' },
+  { id:'ITA-382',     sku:'ITA-382',     name:'VW Monitor IR Blocker — 1.25-Inch', desc:'',    cat:'mounting', price:7.00, stock:'in' },
+  { id:'ITA-383',     sku:'ITA-383',     name:'VW Monitor IR Blocker — 3-Inch', desc:'',       cat:'mounting', price:7.00, stock:'in' },
+  { id:'ITA-384',     sku:'ITA-384',     name:'Exciter Monitor Bracket', desc:'',               cat:'mounting', price:11.00, stock:'in' },
+  { id:'ITAK-152',    sku:'ITAK-152',    name:'Star Ceiling Attachment', desc:'10-Pack',        cat:'mounting', price:68.00, stock:'in' },
+  { id:'ITAK-361',    sku:'ITAK-361',    name:'Monitor Metal Ceiling Attachment 9/16-Inch', desc:'10-Pack', cat:'mounting', price:52.00, stock:'in' },
+  { id:'ITAK-362',    sku:'ITAK-362',    name:'Monitor Metal Ceiling Attachment 15/16-Inch', desc:'10-Pack', cat:'mounting', price:52.00, stock:'in' },
+  { id:'ITAK-363',    sku:'ITAK-363',    name:'Monitor Metal Ceiling Attachment 5/16-Inch', desc:'10-Pack', cat:'mounting', price:52.00, stock:'in' },
+  { id:'ITAK-364M',   sku:'ITAK-364M',   name:'Monitor L-Bracket', desc:'10-Pack',             cat:'mounting', price:58.00, stock:'in' },
+  { id:'ITAK-364VW',  sku:'ITAK-364VW',  name:'VW Monitor L-Bracket', desc:'10-Pack',          cat:'mounting', price:58.00, stock:'in' },
+  { id:'ITAK-368',    sku:'ITAK-368',    name:'Ridge Beam Bracket Kit — Star/Monitor', desc:'', cat:'mounting', price:38.00, stock:'in' },
+  { id:'ITAK-369',    sku:'ITAK-369',    name:'Twist Lock Ceiling Attachment', desc:'10-Pack',  cat:'mounting', price:62.00, stock:'in' },
+  { id:'ITAK-370',    sku:'ITAK-370',    name:'VW Monitor Ceiling Attachment 9/16-Inch Long', desc:'10-Pack', cat:'mounting', price:58.00, stock:'in' },
+  { id:'ITAK-371',    sku:'ITAK-371',    name:'VW Monitor Ceiling Attachment 9/16-Inch', desc:'10-Pack', cat:'mounting', price:58.00, stock:'in' },
+  { id:'ITAK-372',    sku:'ITAK-372',    name:'VW Monitor Ceiling Attachment 15/16-Inch Standard', desc:'10-Pack', cat:'mounting', price:58.00, stock:'in' },
+  { id:'ITAK-373',    sku:'ITAK-373',    name:'VW Monitor Ceiling Attachment 15/16-Inch Long', desc:'10-Pack', cat:'mounting', price:58.00, stock:'in' },
+  { id:'ITAK-377',    sku:'ITAK-377',    name:'Monitor/VW Flush Mount Plate Kit', desc:'',     cat:'mounting', price:42.00, stock:'in' },
+  { id:'ITAK-385',    sku:'ITAK-385',    name:'VW Monitor Back-to-Back Ceiling Attachment', desc:'', cat:'mounting', price:36.00, stock:'low' },
+  { id:'ITAK-751',    sku:'ITAK-751',    name:'Tag 3M VHB Adhesive 0.64mm', desc:'10-Pack',   cat:'mounting', price:24.00, stock:'in' },
+  { id:'ITAK-752',    sku:'ITAK-752',    name:'Tag Snap-In Bracket', desc:'10-Pack',           cat:'mounting', price:28.00, stock:'in' },
+  { id:'ITAK-753',    sku:'ITAK-753',    name:'Tag Snap-In Bracket 3M Adhesive 1.20mm', desc:'10-Pack', cat:'mounting', price:32.00, stock:'in' },
+  { id:'ITAK-755',    sku:'ITAK-755',    name:'Tag Clip with Adhesive Pad', desc:'10-Pack',    cat:'mounting', price:26.00, stock:'in' },
+  { id:'ITAK-760',    sku:'ITAK-760',    name:'Tag Slide-In Bracket', desc:'10-Pack',          cat:'mounting', price:28.00, stock:'in' },
+  { id:'ITAK-761',    sku:'ITAK-761',    name:'Tag Slide-In Bracket 3M VHB Adhesive 1.20mm', desc:'10-Pack', cat:'mounting', price:32.00, stock:'in' },
+  { id:'ITAK-762',    sku:'ITAK-762',    name:'Tag Screw Attachment', desc:'10-Pack',          cat:'mounting', price:22.00, stock:'in' },
+  { id:'ITAK-763',    sku:'ITAK-763',    name:'Staff Badge Button Clip', desc:'10-Pack',       cat:'mounting', price:24.00, stock:'in' },
+  { id:'ITAK-771',    sku:'ITAK-771',    name:'Wi-Fi MM Tag Bracket VHB Adhesive 1.2mm', desc:'10-Pack', cat:'mounting', price:32.00, stock:'in' },
+  { id:'ITAK-772',    sku:'ITAK-772',    name:'Wi-Fi MM Tag Bracket Attachment', desc:'10-Pack', cat:'mounting', price:28.00, stock:'in' },
+  { id:'ITAK-775',    sku:'ITAK-775',    name:'Wi-Fi MM Tag Snap-In Bracket', desc:'10-Pack',  cat:'mounting', price:28.00, stock:'in' },
+  { id:'ITAK-7756',   sku:'ITAK-7756',   name:'Snap-In Bracket with Adhesive for Wi-Fi MM Asset Tag', desc:'10-Pack', cat:'mounting', price:34.00, stock:'in' },
+  { id:'ITAK-776',    sku:'ITAK-776',    name:'Wi-Fi MM Tag Snap-In Bracket 3M Adhesive', desc:'10-Pack', cat:'mounting', price:34.00, stock:'in' },
+  { id:'ITAK-778',    sku:'ITAK-778',    name:'Tag Snap-In Bracket Replacement Kit', desc:'10-Pack', cat:'mounting', price:36.00, stock:'in' },
+  { id:'ITA-8003',    sku:'ITA-8003',    name:'Mounting Strips Medium 12lb', desc:'1 Pair',    cat:'mounting', price:6.00, stock:'in' },
+
+  // ── CABLES & POWER ────────────────────────────────
+  { id:'ITA-151',     sku:'ITA-151',     name:'Star Power Adapter', desc:'',                   cat:'cables', price:22.00, stock:'in' },
+  { id:'ITA-153',     sku:'ITA-153',     name:'Star USB Power Cord & Ethernet Crossover Cable', desc:'', cat:'cables', price:18.00, stock:'in' },
+  { id:'ITA-154',     sku:'ITA-154',     name:'Star Ethernet Cable', desc:'',                  cat:'cables', price:14.00, stock:'in' },
+  { id:'ITA-340-6',   sku:'ITA-340-6',   name:'Exciter Power Adapter — 6 Feet', desc:'',       cat:'cables', price:24.00, stock:'in' },
+  { id:'ITA-8004',    sku:'ITA-8004',    name:'HDMI Cable — 6-Foot', desc:'',                  cat:'cables', price:16.00, stock:'in' },
+  { id:'ITA-8007',    sku:'ITA-8007',    name:'Power Cord with 3 Power Sockets — 15-Foot', desc:'', cat:'cables', price:28.00, stock:'in' },
+  { id:'ITA-8009',    sku:'ITA-8009',    name:'Ethernet Cable — 15-Foot, Black', desc:'',      cat:'cables', price:14.00, stock:'in' },
+  { id:'ITA-8011',    sku:'ITA-8011',    name:'Honeywell 1950h Cable', desc:'',                cat:'cables', price:18.00, stock:'in' },
+  { id:'ITA-667',     sku:'ITA-667',     name:'Web Relay — 4 Output', desc:'',                 cat:'cables', price:95.00, stock:'low' },
+
+  // ── SCANNERS & DEVICES ────────────────────────────
+  { id:'1128-UHF',    sku:'1128-US-BT-UHF-IMG', name:'UHF RFID Scanner with 2D Imager', desc:'', cat:'scanners', price:null, stock:'in' },
+  { id:'ITA-8012',    sku:'ITA-8012',    name:'KioskRT Stand', desc:'',                        cat:'scanners', price:null, stock:'in' },
+  { id:'ITA-8014',    sku:'ITA-8014',    name:'ScreensRT Device', desc:'',                     cat:'scanners', price:null, stock:'in' },
+  { id:'ITA-8016',    sku:'ITA-8016',    name:'KioskRT Device', desc:'',                       cat:'scanners', price:null, stock:'in' },
+  { id:'ITA-8020',    sku:'ITA-8020',    name:'Honeywell 1950h Xenon — No Cable', desc:'',     cat:'scanners', price:null, stock:'in' },
+  { id:'ITA-8022',    sku:'ITA-8022',    name:'Honeywell 1950h Xenon — Wired', desc:'',        cat:'scanners', price:null, stock:'in' },
+  { id:'ITA-8023',    sku:'ITA-8023',    name:'Honeywell 1952HHD Xenon Wireless', desc:'',     cat:'scanners', price:null, stock:'in' },
+  { id:'ITAK-8020',   sku:'ITAK-8020',   name:'Honeywell Xenon XP 1950h with Cable', desc:'', cat:'scanners', price:null, stock:'in' },
+
+  // ── TOOLS & CONSUMABLES ───────────────────────────
+  { id:'ITA-756',     sku:'ITA-756',     name:'Tag Removal Tool', desc:'',                     cat:'tools', price:8.00, stock:'in' },
+  { id:'ITAK-714',    sku:'ITAK-714',    name:'Mini/Micro Asset Tag Opener and Battery Removal Tool', desc:'10-Pack', cat:'tools', price:42.00, stock:'in' },
+  { id:'ITAK-773',    sku:'ITAK-773',    name:'MM Tag Removal Tool', desc:'10-Pack',           cat:'tools', price:38.00, stock:'in' },
+  { id:'ITAK-799',    sku:'ITAK-799',    name:'Asset Tag Battery Removal Tool (Screwdriver)', desc:'Qty 5', cat:'tools', price:28.00, stock:'in' },
+
+  // ── KITS & BUNDLES ────────────────────────────────
+  { id:'SURVEY-KIT',  sku:'SURVEY KIT',  name:'RF Design Survey Kit', desc:'',                cat:'kits', price:null, stock:'in' },
+  { id:'ITAK-8020K',  sku:'ITAK-8020',   name:'Honeywell Xenon XP 1950h with Cable', desc:'Bundle', cat:'kits', price:null, stock:'in' },
+];
+
+// ══════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════
+let cart = {};
+let activeFilter = 'all';
+let searchQuery = '';
+let activePayTab = 'card';
+
+const savedOrders = [
+  { id:'ITAK-764', name:'Tag Battery CR-2430 50-Pack', qty:2 },
+  { id:'ITAK-768', name:'Micro Tag Battery CR-2032 25-Pack', qty:3 },
+  { id:'ITAK-752', name:'Tag Snap-In Bracket 10-Pack', qty:1 },
+];
+
+// SVG icons
+const ICONS = {
+  grid:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>`,
+  zap:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  tag:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>`,
+  anchor:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M5 12H2a10 10 0 0020 0h-3"/></svg>`,
+  link:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>`,
+  monitor: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+  tool:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>`,
+  package: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+};
+
+// ══════════════════════════════════════════════════
+// BUILD UI
+// ══════════════════════════════════════════════════
+function buildCatNav() {
+  const nav = document.getElementById('catNav');
+  nav.innerHTML = CATEGORIES.map(c => {
+    const cnt = c.id === 'all' ? PRODUCTS.length : PRODUCTS.filter(p => p.cat === c.id).length;
+    return `<button class="cat-tab ${c.id==='all'?'active':''}" onclick="setFilter('${c.id}',this)">
+      ${ICONS[c.icon]} ${c.label} <span class="cat-count">${cnt}</span>
+    </button>`;
+  }).join('');
+}
+
+function catMeta(id) {
+  return CATEGORIES.find(c => c.id === id) || {};
+}
+
+function getFiltered() {
+  let list = activeFilter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === activeFilter);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    list = list.filter(p => p.sku.toLowerCase().includes(q) || p.name.toLowerCase().includes(q) || (p.desc||'').toLowerCase().includes(q));
+  }
+  return list;
+}
+
+function renderProducts() {
+  const list = getFiltered();
+  const rows = document.getElementById('productRows');
+  const meta = document.getElementById('panelMeta');
+  const title = document.getElementById('panelTitle');
+
+  const cat = catMeta(activeFilter);
+  title.textContent = searchQuery ? `Search: "${searchQuery}"` : (activeFilter === 'all' ? 'All Products' : cat.label);
+  meta.textContent = `${list.length} product${list.length !== 1 ? 's' : ''}`;
+
+  if (!list.length) {
+    rows.innerHTML = `<div style="padding:40px;text-align:center;color:var(--grey-400);font-size:.88rem">No products found.</div>`;
+    return;
+  }
+
+  // Group by category when showing all
+  if (activeFilter === 'all' && !searchQuery) {
+    let html = '';
+    const cats = [...new Set(PRODUCTS.map(p => p.cat))];
+    cats.forEach(catId => {
+      const catProds = list.filter(p => p.cat === catId);
+      if (!catProds.length) return;
+      const info = catMeta(catId);
+      html += `<div class="cat-section-header">
+        <div class="cat-section-icon">${ICONS[info.icon]||''}</div>
+        <span class="cat-section-title">${info.label}</span>
+        <span class="cat-section-sub">${catProds.length} items</span>
+      </div>`;
+      html += catProds.map(p => productRowHTML(p)).join('');
+    });
+    rows.innerHTML = html;
+  } else {
+    rows.innerHTML = list.map(p => productRowHTML(p)).join('');
+  }
+}
+
+function productRowHTML(p) {
+  const inCart = cart[p.id] ? cart[p.id].qty : 0;
+  const priceStr = p.price ? `$${p.price.toFixed(2)}` : '—';
+  const priceSub = p.price ? (p.desc ? p.desc : '') : 'Quote';
+  const stockHTML = p.stock === 'low'
+    ? `<span class="stock-badge low-stock">Low Stock</span>`
+    : `<span class="stock-badge in-stock">In Stock</span>`;
+  const addLabel = inCart > 0 ? '✓ Added' : 'Add';
+  const addClass = inCart > 0 ? 'add-btn added' : 'add-btn';
+  return `<div class="product-row" id="row-${p.id}">
+    <div class="part-num">${p.sku}</div>
+    <div class="prod-name">${p.name}${p.desc ? `<small>${p.desc}</small>` : ''}</div>
+    <div style="text-align:center">${stockHTML}</div>
+    <div class="price-cell">${priceStr}<span>${priceSub}</span></div>
+    <div class="add-cell">
+      <div class="qty-wrap">
+        <button class="qb" onclick="changeQty('${p.id}',-1)">−</button>
+        <input class="qi" id="qi-${p.id}" type="number" value="${inCart||1}" min="1" max="999">
+        <button class="qb" onclick="changeQty('${p.id}',1)">+</button>
+      </div>
+      <button class="${addClass}" id="ab-${p.id}" onclick="addToCart('${p.id}')">${addLabel}</button>
+    </div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════════
+// INTERACTIONS
+// ══════════════════════════════════════════════════
+function setFilter(id, el) {
+  activeFilter = id;
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderProducts();
+}
+
+function handleSearch() {
+  searchQuery = document.getElementById('searchInput').value.trim();
+  activeFilter = 'all';
+  document.querySelectorAll('.cat-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+  renderProducts();
+}
+
+function changeQty(id, delta) {
+  const inp = document.getElementById(`qi-${id}`);
+  if (!inp) return;
+  inp.value = Math.max(1, (parseInt(inp.value)||1) + delta);
+}
+
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  const qty = parseInt(document.getElementById(`qi-${id}`)?.value)||1;
+  if (cart[id]) cart[id].qty += qty;
+  else cart[id] = { p, qty };
+  document.querySelectorAll(`#ab-${id}`).forEach(b => { b.textContent='✓ Added'; b.classList.add('added'); });
+  showToast(`${p.name} (×${qty}) added`);
+  renderCart();
+}
+
+function removeFromCart(id) {
+  delete cart[id];
+  document.querySelectorAll(`#ab-${id}`).forEach(b => { b.textContent='Add'; b.classList.remove('added'); });
+  renderCart();
+}
+
+function renderCart() {
+  const items = Object.values(cart);
+  const count = items.reduce((s,i) => s+i.qty, 0);
+  const subtotal = items.reduce((s,i) => s + (i.p.price||0)*i.qty, 0);
+
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartBadge').textContent = `${count} item${count!==1?'s':''}`;
+
+  const empty = document.getElementById('cartEmpty');
+  const cartDiv = document.getElementById('cartItems');
+  const totals = document.getElementById('cartTotals');
+  const btn = document.getElementById('checkoutBtn');
+
+  if (!items.length) {
+    empty.style.display=''; cartDiv.innerHTML=''; totals.style.display='none'; btn.disabled=true; return;
+  }
+  empty.style.display='none'; totals.style.display=''; btn.disabled=false;
+
+  cartDiv.innerHTML = items.map(({p,qty}) => `
+    <div class="cart-item">
+      <div>
+        <div class="ci-name">${p.name}</div>
+        <div class="ci-part">${p.sku}</div>
+        <div class="ci-qty">Qty: ${qty}</div>
+      </div>
+      <div>
+        <div class="ci-price">${p.price ? '$'+(p.price*qty).toFixed(2) : 'Quote'}</div>
+        <button class="ci-remove" onclick="removeFromCart('${p.id}')">Remove</button>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+  document.getElementById('grandTotal').textContent = `$${subtotal.toFixed(2)}`;
+}
+
+function loadSaved() {
+  const sec = document.getElementById('savedSection');
+  const list = document.getElementById('savedItems');
+  sec.style.display='';
+  list.innerHTML = savedOrders.map(s => `
+    <div class="saved-item">
+      <span class="saved-name">${s.name} ×${s.qty}</span>
+      <button class="saved-reorder" onclick="quickReorder('${s.id}',${s.qty})">+ Add</button>
+    </div>`).join('');
+  showToast('Last order loaded — click + Add to reorder');
+}
+
+function quickReorder(id, qty) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  if (cart[id]) cart[id].qty += qty; else cart[id] = { p, qty };
+  renderCart();
+  showToast(`${p.name} ×${qty} added`);
+}
+
+// ══════════════════════════════════════════════════
+// CHECKOUT
+// ══════════════════════════════════════════════════
+function openCheckout() {
+  if (!Object.keys(cart).length) return;
+  document.getElementById('modalAcct').value = document.getElementById('acctNum').value;
+  const items = Object.values(cart);
+  const sub = items.reduce((s,i) => s+(i.p.price||0)*i.qty, 0);
+  document.getElementById('orderMini').innerHTML =
+    items.map(({p,qty}) => `<div class="om-row"><span>${p.name} ×${qty}</span><span>${p.price?'$'+(p.price*qty).toFixed(2):'Quote'}</span></div>`).join('') +
+    `<div class="om-row total"><span>Estimated Total</span><span>$${sub.toFixed(2)}</span></div>`;
+  document.getElementById('submitTotal').textContent = `$${sub.toFixed(2)}`;
+  document.getElementById('checkoutForm').style.display='';
+  document.getElementById('successView').classList.remove('show');
+  document.getElementById('checkoutOverlay').classList.add('open');
+}
+
+function closeCheckout() {
+  document.getElementById('checkoutOverlay').classList.remove('open');
+}
+
+function setPayTab(el, type) {
+  activePayTab = type;
+  document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('cardFields').style.display = type==='card' ? '' : 'none';
+  document.getElementById('net30Fields').style.display = type==='net30' ? '' : 'none';
+  document.getElementById('poFields').style.display = type==='po' ? '' : 'none';
+}
+
+function submitOrder() {
+  const ref = 'CTK-' + new Date().getFullYear() + '-' + Math.random().toString(36).substr(2,7).toUpperCase();
+  document.getElementById('orderRef').textContent = ref;
+  document.getElementById('checkoutForm').style.display='none';
+  document.getElementById('successView').classList.add('show');
+  cart = {};
+  renderCart();
+  document.querySelectorAll('.add-btn').forEach(b => { b.textContent='Add'; b.classList.remove('added'); });
+}
+
+document.getElementById('checkoutOverlay').addEventListener('click', e => { if (e.target.id==='checkoutOverlay') closeCheckout(); });
+
+// ══════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════
+let toastT;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// INIT
+buildCatNav();
+renderProducts();
+renderCart();
+</script>
+</body>
+</html>
